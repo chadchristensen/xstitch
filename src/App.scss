@@ -1,0 +1,7 @@
+@import 'styles/_colors.scss';
+
+.board-square {
+  height: 10px;
+  width: 10px;
+  border: 1px solid $gray-light;
+}
