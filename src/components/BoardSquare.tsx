@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 
-const BoardSquare: React.FC = () => {
-  const [color, setColor] = useState('#000000');
+interface Props {
+  idx: number;
+  handleSquareClick: (idx: number) => void;
+}
+
+const BoardSquare: React.FC<Props> = () => {
+  const [color, setColor] = useState('#ffffff');
 
   const handleColorChange = () => {
     color === '#000000' ? setColor('#fefefe') : setColor('#000000');
