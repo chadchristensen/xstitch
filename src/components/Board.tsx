@@ -35,6 +35,7 @@ const Board: React.FC<BoardProps> = ({ currentColor }) => {
         type="text"
         value={boardTitle}
         name="board-title"
+        className="board-title"
         onChange={handleBoardTitleChange}
       />
 
