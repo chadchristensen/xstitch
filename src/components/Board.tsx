@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import BoardSquare from './BoardSquare';
 import sampleData from '../sampleData.json';
 
-const Board: React.FC = () => {
+interface BoardProps {
+  currentColor: string;
+}
+
+const Board: React.FC<BoardProps> = ({ currentColor }) => {
   const [boardTitle, setBoardTitle] = useState('New Board');
   const [boardSquares, setBoardSquares] = useState(Array(2000).fill('#ffffff'));
 
@@ -10,7 +14,7 @@ const Board: React.FC = () => {
     // TODO: revisit if there is a better way
     const copiedBoard = [...boardSquares];
 
-    copiedBoard[idx] = '#fe0120';
+    copiedBoard[idx] = currentColor;
     setBoardSquares(copiedBoard);
   };
 
@@ -26,7 +30,7 @@ const Board: React.FC = () => {
   };
 
   return (
-    <>
+    <div className="board-display-container">
       <input
         type="text"
         value={boardTitle}
@@ -46,7 +50,7 @@ const Board: React.FC = () => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 

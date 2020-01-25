@@ -1,9 +1,9 @@
 import React from 'react';
-import Board from './components/Board';
+import BoardBuilderPage from './components/BoardBuilderPage';
 import './App.scss';
 
 const App: React.FC = () => {
-  return <Board />;
+  return <BoardBuilderPage />;
 };
 
 export default App;
