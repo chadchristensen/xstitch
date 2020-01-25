@@ -10,7 +10,7 @@ const Board: React.FC<BoardProps> = ({ currentColor }) => {
   const [boardTitle, setBoardTitle] = useState('New Board');
   const [boardSquares, setBoardSquares] = useState(Array(2000).fill('#ffffff'));
 
-  const handleSquareClick = (idx: number): void => {
+  const handleBoardUpdate = (idx: number): void => {
     // TODO: revisit if there is a better way
     const copiedBoard = [...boardSquares];
 
@@ -45,8 +45,9 @@ const Board: React.FC<BoardProps> = ({ currentColor }) => {
             <BoardSquare
               key={idx}
               idx={idx}
-              color={color}
-              handleSquareClick={handleSquareClick}
+              squareColor={color}
+              handleBoardUpdate={handleBoardUpdate}
+              currentColor={currentColor}
             />
           );
         })}

@@ -3,7 +3,7 @@ import Board from './Board';
 import SideBar from './SideBar';
 
 const BoardBuilderPage: React.FC = () => {
-  const [currentColor, setCurrentColor] = useState('#feab01');
+  const [currentColor, setCurrentColor] = useState('#2ccce4');
 
   return (
     <div className="board-builder-container">
