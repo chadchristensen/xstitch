@@ -4,7 +4,7 @@ interface Props {
   idx: number;
   squareColor: string;
   currentColor: string;
-  handleBoardUpdate: (idx: number) => void;
+  handleBoardUpdate: (idx: number, squareColor: string) => void;
 }
 
 const BoardSquare: React.FC<Props> = ({
@@ -14,8 +14,7 @@ const BoardSquare: React.FC<Props> = ({
   handleBoardUpdate
 }) => {
   const handleColorChange = (): void => {
-    if (squareColor === currentColor) return;
-    handleBoardUpdate(idx);
+    handleBoardUpdate(idx, squareColor);
   };
 
   return (

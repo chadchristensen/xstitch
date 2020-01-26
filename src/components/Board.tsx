@@ -4,24 +4,28 @@ import sampleData from '../sampleData.json';
 
 interface BoardProps {
   currentColor: string;
+  currentTool: string;
 }
 
-const Board: React.FC<BoardProps> = ({ currentColor }) => {
+const Board: React.FC<BoardProps> = ({ currentColor, currentTool }) => {
   const [boardTitle, setBoardTitle] = useState('New Board');
   const [boardSquares, setBoardSquares] = useState(Array(2000).fill('#ffffff'));
-
-  const handleBoardUpdate = (idx: number): void => {
-    // TODO: revisit if there is a better way
-    const copiedBoard = [...boardSquares];
-
-    copiedBoard[idx] = currentColor;
-    setBoardSquares(copiedBoard);
-  };
 
   useEffect(() => {
     setBoardTitle(sampleData.title);
     setBoardSquares(sampleData.squares);
   }, []);
+
+  const handleBoardUpdate = (idx: number, squareColor: string): void => {
+    if (currentTool === 'PAINT' && squareColor === currentColor) return;
+
+    // TODO: revisit if there is a better way
+    const copiedBoard = [...boardSquares];
+
+    copiedBoard[idx] = currentTool === 'PAINT' ? currentColor : '#ffffff';
+
+    setBoardSquares(copiedBoard);
+  };
 
   const handleBoardTitleChange = (
     e: React.FormEvent<HTMLInputElement>

@@ -4,11 +4,16 @@ import SideBar from './SideBar';
 
 const BoardBuilderPage: React.FC = () => {
   const [currentColor, setCurrentColor] = useState('#2ccce4');
+  const [tool, setTool] = useState('PAINT');
 
   return (
     <div className="board-builder-container">
-      <Board currentColor={currentColor} />
-      <SideBar currentColor={currentColor} setCurrentColor={setCurrentColor} />
+      <Board currentColor={currentColor} currentTool={tool} />
+      <SideBar
+        currentColor={currentColor}
+        setTool={setTool}
+        setCurrentColor={setCurrentColor}
+      />
     </div>
   );
 };
