@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { BlockPicker } from 'react-color';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEraser, faPaintBrush } from '@fortawesome/pro-light-svg-icons';
 
 interface SideBarProps {
   currentColor: string;
@@ -31,8 +33,12 @@ const SideBar: React.FC<SideBarProps> = ({
   return (
     <div className="sidebar-container">
       <div className="toolbar">
-        <button onClick={() => handleToolChange('PAINT')}>Paint</button>
-        <button onClick={() => handleToolChange('ERASE')}>Erase</button>
+        <button onClick={() => handleToolChange('PAINT')}>
+          <FontAwesomeIcon icon={faPaintBrush} />
+        </button>
+        <button onClick={() => handleToolChange('ERASE')}>
+          <FontAwesomeIcon icon={faEraser} />
+        </button>
       </div>
       <p>Current Color</p>
       <hr />
