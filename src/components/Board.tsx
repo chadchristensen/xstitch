@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import BoardSquare from './BoardSquare';
 import sampleData from '../sampleData.json';
+import { Tools } from '../constants';
 
 interface BoardProps {
   currentColor: string;
-  currentTool: string;
+  currentTool: Tools;
 }
 
 const Board: React.FC<BoardProps> = ({ currentColor, currentTool }) => {
@@ -17,12 +18,12 @@ const Board: React.FC<BoardProps> = ({ currentColor, currentTool }) => {
   }, []);
 
   const handleBoardUpdate = (idx: number, squareColor: string): void => {
-    if (currentTool === 'PAINT' && squareColor === currentColor) return;
+    if (currentTool === Tools.Paint && squareColor === currentColor) return;
 
     // TODO: revisit if there is a better way
     const copiedBoard = [...boardSquares];
 
-    copiedBoard[idx] = currentTool === 'PAINT' ? currentColor : '#ffffff';
+    copiedBoard[idx] = currentTool === Tools.Paint ? currentColor : '#ffffff';
 
     setBoardSquares(copiedBoard);
   };
