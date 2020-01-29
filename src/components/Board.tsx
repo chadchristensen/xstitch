@@ -18,7 +18,11 @@ const Board: React.FC<BoardProps> = ({ currentColor, currentTool }) => {
   }, []);
 
   const handleBoardUpdate = (idx: number, squareColor: string): void => {
-    if (currentTool === Tools.Paint && squareColor === currentColor) return;
+    if (
+      (currentTool === Tools.Paint && squareColor === currentColor) ||
+      (currentTool === Tools.Erase && squareColor === '#ffffff')
+    )
+      return;
 
     // TODO: revisit if there is a better way
     const copiedBoard = [...boardSquares];
