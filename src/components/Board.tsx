@@ -27,7 +27,7 @@ const Board: React.FC<BoardProps> = ({ currentColor, currentTool }) => {
     // TODO: revisit if there is a better way
     const copiedBoard = [...boardSquares];
 
-    copiedBoard[idx] = currentTool === Tools.Paint ? currentColor : '#ffffff';
+    copiedBoard[idx] = currentTool === Tools.Paint ? currentColor : null;
 
     setBoardSquares(copiedBoard);
   };
