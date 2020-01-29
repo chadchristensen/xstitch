@@ -20,7 +20,7 @@ const Board: React.FC<BoardProps> = ({ currentColor, currentTool }) => {
   const handleBoardUpdate = (idx: number, squareColor: string): void => {
     if (
       (currentTool === Tools.Paint && squareColor === currentColor) ||
-      (currentTool === Tools.Erase && squareColor === '#ffffff')
+      (currentTool === Tools.Erase && squareColor === null)
     )
       return;
 
