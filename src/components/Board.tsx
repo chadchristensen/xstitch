@@ -10,11 +10,11 @@ interface BoardProps {
 
 const Board: React.FC<BoardProps> = ({ currentColor, currentTool }) => {
   const [boardTitle, setBoardTitle] = useState('New Board');
-  const [boardSquares, setBoardSquares] = useState(Array(2000).fill('#ffffff'));
+  const [boardSquares, setBoardSquares] = useState(Array(2000).fill(null));
 
   useEffect(() => {
     setBoardTitle(sampleData.title);
-    setBoardSquares(sampleData.squares);
+    // setBoardSquares(sampleData.squares);
   }, []);
 
   const handleBoardUpdate = (idx: number, squareColor: string): void => {
@@ -56,7 +56,6 @@ const Board: React.FC<BoardProps> = ({ currentColor, currentTool }) => {
               idx={idx}
               squareColor={color}
               handleBoardUpdate={handleBoardUpdate}
-              currentColor={currentColor}
             />
           );
         })}
