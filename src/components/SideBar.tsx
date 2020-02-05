@@ -8,13 +8,15 @@ interface SideBarProps {
   tool: Tools;
   setCurrentColor: (hex: string) => void;
   setTool: (toolType: Tools) => void;
+  documentColors: string[];
 }
 
 const SideBar: React.FC<SideBarProps> = ({
   currentColor,
   tool,
   setCurrentColor,
-  setTool
+  setTool,
+  documentColors
 }) => {
   const [isColorPickerDisplayed, setIsColorPickerDisplayed] = useState(false);
 
@@ -46,6 +48,18 @@ const SideBar: React.FC<SideBarProps> = ({
       {isColorPickerDisplayed ? (
         <BlockPicker color={currentColor} onChange={handleChangeComplete} />
       ) : null}
+      <div className="document-colors-container">
+        <p>Document Colors</p>
+        <div className="document-colors-options">
+          {documentColors.map((color, i) => (
+            <div
+              key={i}
+              onClick={() => setCurrentColor(color)}
+              style={{ backgroundColor: color }}
+            ></div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

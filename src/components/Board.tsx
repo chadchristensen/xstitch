@@ -6,9 +6,14 @@ import { Tools } from '../constants';
 interface BoardProps {
   currentColor: string;
   currentTool: Tools;
+  updateDocumentColors: (docColors: { [key: number]: string }) => void;
 }
 
-const Board: React.FC<BoardProps> = ({ currentColor, currentTool }) => {
+const Board: React.FC<BoardProps> = ({
+  currentColor,
+  currentTool,
+  updateDocumentColors
+}) => {
   const [boardTitle, setBoardTitle] = useState('New Board');
   const [boardSquares, setBoardSquares] = useState<{ [key: number]: string }>(
     {}
@@ -28,7 +33,6 @@ const Board: React.FC<BoardProps> = ({ currentColor, currentTool }) => {
     )
       return;
 
-    // TODO: revisit if there is a better way
     const copiedBoard = { ...boardSquares };
 
     currentTool === Tools.Paint
@@ -36,6 +40,7 @@ const Board: React.FC<BoardProps> = ({ currentColor, currentTool }) => {
       : delete copiedBoard[idx];
 
     setBoardSquares(copiedBoard);
+    updateDocumentColors(copiedBoard);
   };
 
   const handleBoardTitleChange = (
