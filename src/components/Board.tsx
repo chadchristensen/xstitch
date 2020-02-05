@@ -10,24 +10,30 @@ interface BoardProps {
 
 const Board: React.FC<BoardProps> = ({ currentColor, currentTool }) => {
   const [boardTitle, setBoardTitle] = useState('New Board');
-  const [boardSquares, setBoardSquares] = useState(Array(2000).fill(null));
+  const [boardSquares, setBoardSquares] = useState<{ [key: number]: string }>(
+    {}
+  );
 
   useEffect(() => {
     setBoardTitle(sampleData.title);
     // setBoardSquares(sampleData.squares);
   }, []);
 
+  const blankBoard = Array(2000).fill(null);
+
   const handleBoardUpdate = (idx: number, squareColor: string): void => {
     if (
       (currentTool === Tools.Paint && squareColor === currentColor) ||
-      (currentTool === Tools.Erase && squareColor === null)
+      (currentTool === Tools.Erase && squareColor === undefined)
     )
       return;
 
     // TODO: revisit if there is a better way
-    const copiedBoard = [...boardSquares];
+    const copiedBoard = { ...boardSquares };
 
-    copiedBoard[idx] = currentTool === Tools.Paint ? currentColor : null;
+    currentTool === Tools.Paint
+      ? (copiedBoard[idx] = currentColor)
+      : delete copiedBoard[idx];
 
     setBoardSquares(copiedBoard);
   };
@@ -49,12 +55,12 @@ const Board: React.FC<BoardProps> = ({ currentColor, currentTool }) => {
       />
 
       <div className="board-grid-container">
-        {boardSquares.map((color, idx) => {
+        {blankBoard.map((cell, idx) => {
           return (
             <BoardSquare
               key={idx}
               idx={idx}
-              squareColor={color}
+              squareColor={boardSquares[idx]}
               handleBoardUpdate={handleBoardUpdate}
             />
           );
