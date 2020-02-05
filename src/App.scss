@@ -78,3 +78,24 @@
     }
   }
 }
+
+.document-colors-container {
+  width: 50%;
+  text-align: center;
+
+  .document-colors-options {
+    display: flex;
+
+    div {
+      width: 25px;
+      height: 25px;
+      border: 1px solid darken($gray-light, 10%);
+      border-radius: 2px;
+      margin: 5px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
