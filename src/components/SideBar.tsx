@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { BlockPicker } from 'react-color';
+import React from 'react';
 import { Tools } from '../constants';
 import ToolBar from './ToolBar';
+import ColorPicker from './ColorPicker';
 
 interface SideBarProps {
   currentColor: string;
@@ -18,14 +18,7 @@ const SideBar: React.FC<SideBarProps> = ({
   setTool,
   documentColors
 }) => {
-  const [isColorPickerDisplayed, setIsColorPickerDisplayed] = useState(false);
-
-  const handlePickerClick = (): void => {
-    // TODO: Convert to using function arg
-    setIsColorPickerDisplayed(!isColorPickerDisplayed);
-  };
-
-  const handleChangeComplete = (color: { hex: string }): void => {
+  const handleColorChange = (color: { hex: string }): void => {
     setCurrentColor(color.hex);
   };
 
@@ -43,11 +36,11 @@ const SideBar: React.FC<SideBarProps> = ({
           backgroundColor: currentColor
         }}
         className="current-color"
-        onClick={() => handlePickerClick()}
       ></div>
-      {isColorPickerDisplayed ? (
-        <BlockPicker color={currentColor} onChange={handleChangeComplete} />
-      ) : null}
+      <ColorPicker
+        currentColor={currentColor}
+        handleColorChange={handleColorChange}
+      />
       <div className="document-colors-container">
         <p>Document Colors</p>
         <div className="document-colors-options">
