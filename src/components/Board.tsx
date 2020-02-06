@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import BoardSquare from './BoardSquare';
 import sampleData from '../sampleData.json';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChalkboard } from '@fortawesome/pro-light-svg-icons';
 import { Tools } from '../constants';
 
 interface BoardProps {
@@ -51,6 +53,11 @@ const Board: React.FC<BoardProps> = ({
 
   return (
     <div className="board-display-container">
+      <button className="btn-with-icon" onClick={() => setBoardSquares({})}>
+        <FontAwesomeIcon icon={faChalkboard} />
+        <span>Clear Board</span>
+      </button>
+
       <input
         type="text"
         value={boardTitle}
