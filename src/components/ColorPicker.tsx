@@ -1,5 +1,5 @@
 import React from 'react';
-import { SliderPicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 
 interface ColorPickerProps {
   currentColor: string;
@@ -11,8 +11,12 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   handleColorChange
 }) => {
   return (
-    <div style={{ width: '80%', padding: '1.5em' }}>
-      <SliderPicker color={currentColor} onChange={handleColorChange} />
+    <div className="color-picker">
+      <ChromePicker
+        disableAlpha={true}
+        color={currentColor}
+        onChange={handleColorChange}
+      />
     </div>
   );
 };
