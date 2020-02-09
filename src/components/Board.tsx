@@ -8,7 +8,10 @@ import { Tools } from '../constants';
 interface BoardProps {
   currentColor: string;
   currentTool: Tools;
-  updateDocumentColors: (docColors: { [key: number]: string }) => void;
+  updateDocumentColors: (
+    action: string,
+    docColors: { [key: number]: string }
+  ) => void;
 }
 
 const Board: React.FC<BoardProps> = ({
@@ -42,7 +45,7 @@ const Board: React.FC<BoardProps> = ({
       : delete copiedBoard[idx];
 
     setBoardSquares(copiedBoard);
-    updateDocumentColors(copiedBoard);
+    updateDocumentColors(currentTool, copiedBoard);
   };
 
   const handleBoardTitleChange = (
@@ -51,9 +54,14 @@ const Board: React.FC<BoardProps> = ({
     setBoardTitle(e.currentTarget.value);
   };
 
+  const handleBoardClear = (): void => {
+    setBoardSquares({});
+    updateDocumentColors('CLEAR_BOARD', {});
+  };
+
   return (
     <div className="board-display-container">
-      <button className="btn-with-icon" onClick={() => setBoardSquares({})}>
+      <button className="btn-with-icon" onClick={handleBoardClear}>
         <FontAwesomeIcon icon={faChalkboard} />
         <span>Clear Board</span>
       </button>

@@ -8,26 +8,63 @@ const BoardBuilderPage: React.FC = () => {
   const [tool, setTool] = useState(Tools.Paint);
   const [documentColors, setDocumentColors] = useState<string[]>([]);
 
-  const updateDocumentColors = (boardSquares: {
-    [key: number]: string;
-  }): void => {
-    if (tool === Tools.Erase) {
-      let uniqueBoardColors = new Set(Object.values(boardSquares));
-
-      if (uniqueBoardColors.size === documentColors.length) return;
-
-      setDocumentColors(
-        documentColors.filter(color => uniqueBoardColors.has(color))
-      );
-      return;
+  const updateDocumentColors = (
+    action: string,
+    boardSquares: {
+      [key: number]: string;
     }
+  ): void => {
+    let uniqueBoardColors = new Set(Object.values(boardSquares));
 
-    if (tool === Tools.Paint) {
-      if (documentColors.includes(currentColor)) {
-        return;
-      } else {
-        setDocumentColors([...documentColors, currentColor]);
-      }
+    switch (action) {
+      case Tools.Erase:
+        if (uniqueBoardColors.size === documentColors.length) return;
+        setDocumentColors(
+          documentColors.filter(color => uniqueBoardColors.has(color))
+        );
+        break;
+      case Tools.Paint:
+        if (uniqueBoardColors.size === documentColors.length) {
+          if (uniqueBoardColors.size === 1) {
+            setDocumentColors([uniqueBoardColors.values().next().value]);
+            return;
+          } else {
+            let indexToRemove = documentColors.findIndex(
+              color => uniqueBoardColors.has(color) === false
+            );
+            if (indexToRemove > -1) {
+              // Remove color at index
+              let updatedDocumentColors = [
+                ...documentColors.slice(0, indexToRemove),
+                ...documentColors.slice(indexToRemove + 1)
+              ];
+              // Add new color to document colors
+              uniqueBoardColors.forEach(color => {
+                if (!updatedDocumentColors.includes(color)) {
+                  setDocumentColors([...updatedDocumentColors, color]);
+                  return;
+                }
+              });
+            }
+          }
+        } else if (uniqueBoardColors.size > documentColors.length) {
+          uniqueBoardColors.forEach(color => {
+            if (!documentColors.includes(color)) {
+              setDocumentColors([...documentColors, color]);
+              return;
+            }
+          });
+        } else if (uniqueBoardColors.size <= documentColors.length) {
+          setDocumentColors(
+            documentColors.filter(color => uniqueBoardColors.has(color))
+          );
+        }
+        break;
+      case 'CLEAR_BOARD':
+        setDocumentColors([]);
+        break;
+      default:
+        break;
     }
   };
 
