@@ -17,6 +17,6 @@ if (process.env.NETLIFY === 'true') { // this is a default Netlify environment v
 		// this script won't pick up the .npmrc file we just created.
 		// The original yarn process will continue after this second yarn process finishes,
 		// and when it does it will report "success Already up-to-date."
-		spawnSync('npm', { stdio: 'inherit' })
+		spawnSync('npm', ['install'], { stdio: 'inherit' })
 	}
 }
